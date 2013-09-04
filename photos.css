@@ -9,14 +9,43 @@ body {
 }
 
 .photo {
-    float: left;
-    margin: 0 2px 2px 0;
+	position:relative;
+	float: left;
+    margin: 10px;
     overflow: hidden;
     height: 160px;
-}
-
-.photo,
-.photo img {
     min-width: 160px;
     max-width: 240px;
+    border-radius:25px;
+    box-shadow: 10px 10px 5px #777;
+    z-index: 1;
 }
+
+.heart {
+	position:absolute;
+	right:7%;
+	bottom:5%;
+	z-index: 2;
+    border-radius:25px;
+	background-color: #c44;
+	border-width: 1.5px;
+	border-color: #e55;
+	border-style: solid;
+}
+
+.icon-heart {
+	color:#f69;
+}
+
+.icon-heart-empty {
+	color:#911;
+}
+
+
+.heart:hover {
+	transform:rotate(-25deg);
+	-webkit-transform:rotate(-25deg);
+	border-width: 1.5px;
+	border-style: solid;
+}
+

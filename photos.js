@@ -65,11 +65,33 @@ var setupPhotos = (function ($) {
         var holder = document.getElementById(id);
         return function (img) {
             var elm = document.createElement('div');
-            elm.className = 'photo';
+            var elmfav = document.createElement('div');
+            elm.className = 'photo fav';
+            var i;
+            for (i = 0; i <= localStorage.length; i++) {
+
+                if (img.src == localStorage.getItem(i)) {
+                    elmfav.className = 'heart icon-heart';            
+                    break;
+                }
+                else { 
+                    elmfav.className = 'heart icon-heart-empty'; 
+                }
+            }
+            elmfav.setAttribute('name',img.src);
+            elmfav.setAttribute('onclick','favcheck("'+img.src+'")');
             elm.appendChild(img);
+            elm.appendChild(elmfav);
             holder.appendChild(elm);
+        
         };
+        
     }
+
+/*
+            localStorage.setItem('imm','xx');
+            alert(localStorage.getItem('imm'));*/
+
 
     // ----
     
@@ -82,4 +104,26 @@ var setupPhotos = (function ($) {
             callback();
         });
     };
+
+
+
 }(jQuery));
+
+//window.localStorage.clear();
+
+
+function favcheck(fav) {
+    var x,max = localStorage.length;
+    for (x = 0; x <= max; x++) {
+        if (fav == localStorage.getItem(x)) {
+            localStorage.removeItem(x);
+            document.getElementsByName(fav)[0].className = "heart icon-heart-empty";
+            break;                    
+        }
+        if ( (x == max) && (fav != localStorage.getItem(x)) ) {
+            localStorage.setItem(max++,fav);
+            document.getElementsByName(fav)[0].className = "heart icon-heart";
+            break;
+        }
+    }
+}
